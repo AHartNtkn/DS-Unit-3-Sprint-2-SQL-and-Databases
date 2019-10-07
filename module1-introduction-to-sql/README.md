@@ -52,13 +52,96 @@ Use `sqlite3` to load and write queries to explore the data, and answer the
 following questions:
 
 - How many total Characters are there?
+
+`SELECT COUNT(name) FROM charactercreator_character;`
+
+302
+
 - How many of each specific subclass?
+
+`SELECT COUNT(character_ptr_id) FROM charactercreator_cleric;`
+
+75
+
+`SELECT COUNT(character_ptr_id) FROM charactercreator_fighter;`
+
+68
+
+`SELECT COUNT(character_ptr_id) FROM charactercreator_mage;`
+
+108
+
+`SELECT COUNT(mage_ptr_id) FROM charactercreator_necromancer;`
+
+11
+
+`SELECT COUNT(character_ptr_id) FROM charactercreator_thief;`
+
+51
+
 - How many total Items?
+
+`SELECT COUNT(name) FROM armory_item;`
+
+174
+
 - How many of the Items are weapons? How many are not?
+
+`SELECT count(item_ptr_id) FROM armory_weapon;`
+
+37
+
+`SELECT count(item_id) FROM armory_item WHERE NOT(item_id IN (SELECT item_ptr_id FROM armory_weapon));`
+
+137
+
 - How many Items does each character have? (Return first 20 rows)
+
+```
+SELECT character_id, COUNT(*) total_items
+FROM charactercreator_character_inventory
+GROUP BY character_id
+ORDER BY character_id
+LIMIT 20;
+```
+
 - How many Weapons does each character have? (Return first 20 rows)
+
+```
+SELECT character_id, COUNT(*) total_items
+FROM charactercreator_character_inventory
+     INNER JOIN
+     armory_weapon
+	   ON item_id == item_ptr_id
+GROUP BY character_id
+ORDER BY character_id
+LIMIT 20;
+```
+
 - On average, how many Items does each Character have?
+
+
+```
+SELECT CAST(total_items AS float) / CAST(total_chars AS float) FROM
+(SELECT COUNT(*) total_items FROM charactercreator_character_inventory),
+(SELECT COUNT(*) total_chars FROM charactercreator_character)
+```
+
+2.97350993377483
+
 - On average, how many Weapons does each character have?
+
+```
+SELECT CAST(total_items AS float) / CAST(total_chars AS float) FROM
+(SELECT COUNT(*) total_items FROM charactercreator_character_inventory
+                                  INNER JOIN
+                                  armory_weapon
+                                  ON item_id == item_ptr_id),
+(SELECT COUNT(*) total_chars FROM charactercreator_character)
+```
+
+0.672185430463576
+
 
 You do not need all the tables - in particular, the `account_*`, `auth_*`,
 `django_*`, and `socialaccount_*` tables are for the application and do not have
