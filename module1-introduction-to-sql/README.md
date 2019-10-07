@@ -112,7 +112,7 @@ SELECT character_id, COUNT(*) total_items
 FROM charactercreator_character_inventory
      INNER JOIN
      armory_weapon
-	   ON item_id == item_ptr_id
+     ON item_id == item_ptr_id
 GROUP BY character_id
 ORDER BY character_id
 LIMIT 20;
