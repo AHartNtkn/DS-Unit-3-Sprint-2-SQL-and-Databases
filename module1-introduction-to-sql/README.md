@@ -127,6 +127,15 @@ SELECT CAST(total_items AS float) / CAST(total_chars AS float) FROM
 (SELECT COUNT(*) total_chars FROM charactercreator_character)
 ```
 
+Or, alternatively
+
+```
+SELECT AVG(total_items) FROM
+(SELECT COUNT(*) total_items
+FROM charactercreator_character_inventory
+GROUP BY character_id)
+```
+
 2.97350993377483
 
 - On average, how many Weapons does each character have?
