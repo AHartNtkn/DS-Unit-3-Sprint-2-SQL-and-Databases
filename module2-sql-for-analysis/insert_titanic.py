@@ -3,7 +3,7 @@ import pandas as pd
 
 dbname = "izwhyriw"
 user = "izwhyriw"
-password = "OsPabQ1kWOH-F3ONCaxsoXcV6h9kwJim"
+password = "TODO" # Insert Password
 host = 'salt.db.elephantsql.com'
 
 pg_conn = psycopg2.connect(dbname = dbname,
