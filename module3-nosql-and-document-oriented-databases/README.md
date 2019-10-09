@@ -37,6 +37,86 @@ so here. Then answer the following question (can be a comment in the top of your
 code or in Markdown) - "How was working with MongoDB different from working with
 PostgreSQL? What was easier, and what was harder?"
 
+```
+import sys
+print(sys.version)
+
+!pip install pymongo
+import pymongo
+
+#Full driver
+client = pymongo.MongoClient("mongodb://admin:<password>@cluster0-shard-00-00-wpqd5.mongodb.net:27017,cluster0-shard-00-01-wpqd5.mongodb.net:27017,cluster0-shard-00-02-wpqd5.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority")
+db = client.test
+
+#insert a document
+db.test.insert_one({'x':1})
+db.test.count_documents({'x': 1})
+db.test.insert_one({'x':1})
+db.test.count_documents({'x': 1})
+
+curser = db.test.find({'x':1})
+
+list(curser)
+
+db.test.insert_one({'x':1})
+
+anthony_doc = {
+   'favorite_animal' : ['leafy sea dragon', 'dragon']   
+}
+
+rudy_doc = {
+   'favorite_animal' : 'Koala',
+   'favorite_color' : 'Blue'
+}
+
+coop_doc = {
+   'favorite_animal' : 'Pangolin'
+}
+
+db.test.insert_many([anthony_doc, rudy_doc, coop_doc])
+
+list(db.test.find())
+
+more_docs = []
+
+for i in range(10):
+    doc = {'even': i % 2 == 0}
+    doc['value'] = i
+    more_docs.append(doc)
+
+more_docs
+
+db.test.insert_many(more_docs)
+
+list(db.test.find({'even':False}))
+
+db.test.update_one({'value':3},
+                   {'$inc': {'value':5}})
+                   
+list(db.test.find({'value':3}))
+
+db.test.update_many({'even':True},
+                   {'$inc': {'value':100}})
+                   
+list(db.test.find({'even':True}))
+
+db.test.delete_many({'even':False})
+
+rpg_char = (1, "King Bob", 10)
+
+db.test.insert_one({"rpg_char" : rpg_char})
+
+db.test.insert_one({
+    'sql_id': rpg_char[0],
+    'name': rpg_char[1],
+    'hp' : rpg_char[1]
+})
+
+list(db.test.find())
+```
+
+In most ways, interacting with the MongoDB is simpler, just shove data in, and take data out. There's little to no structure to it, which makes it simpler, but less useful at the same time. With PostgreSQL, everything was done with SQL queries, which, while being more complex than the MongoDB calls, were generally able to reveal more interesting structural information.
+
 There is no other required tasks to turn in, but it is suggested to then revisit
 the first two modules, rework/complete things as needed, and just check out with
 fresh eyes the SQL approach. Compare and contrast, and come with questions
