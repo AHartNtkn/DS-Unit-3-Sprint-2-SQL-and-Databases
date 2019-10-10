@@ -44,18 +44,231 @@ the same questions as you did from the first module (when the RPG data was in
 SQLite). With PostgreSQL, answer the following:
 
 - How many passengers survived, and how many died?
+
+```
+print("Survived: ", len(list(db.test.find({'Survived': 1}))))
+print("Died: ", len(list(db.test.find({'Survived': 0}))))
+```
+
+```
+Survived:  342
+Died:  545
+```
+
 - How many passengers were in each class?
+
+```
+print("First: ", len(list(db.test.find({'Pclass': 1}))))
+print("Second: ", len(list(db.test.find({'Pclass': 2}))))
+print("Third: ", len(list(db.test.find({'Pclass': 3}))))
+```
+
+```
+First:  216
+Second:  184
+Third:  487
+```
+
 - How many passengers survived/died within each class?
+
+```
+print("First Survivers: ", len(list(db.test.find({'Survived': 1, 'Pclass': 1}))))
+print("First NonSurviver: ", len(list(db.test.find({'Survived': 0, 'Pclass': 1}))))
+print("Second Survivers: ", len(list(db.test.find({'Survived': 1, 'Pclass': 2}))))
+print("Second NonSurviver: ", len(list(db.test.find({'Survived': 0, 'Pclass': 2}))))
+print("Third Survivers: ", len(list(db.test.find({'Survived': 1, 'Pclass': 3}))))
+print("Third NonSurviver: ", len(list(db.test.find({'Survived': 0, 'Pclass': 3}))))
+```
+
+```
+First Survivers:  136
+First NonSurviver:  80
+Second Survivers:  87
+Second NonSurviver:  97
+Third Survivers:  119
+Third NonSurviver:  368
+```
+
 - What was the average age of survivors vs nonsurvivors?
+
+```
+import numpy as np
+print("Surviver average age: ", 
+      np.mean([d['Age'] for d in list(db.test.find({'Survived': 1}))])
+     )
+print("NonSurviver average age: ", 
+      np.mean([d['Age'] for d in list(db.test.find({'Survived': 0}))])
+     )
+```
+
+```
+Surviver average age:  28.408391812865496
+NonSurviver average age:  30.13853211009174
+```
+
 - What was the average age of each passenger class?
+
+```
+print("First average age: ", 
+      np.mean([d['Age'] for d in list(db.test.find({'Pclass': 1}))])
+     )
+print("Second average age: ", 
+      np.mean([d['Age'] for d in list(db.test.find({'Pclass': 2}))])
+     )
+print("Third average age: ", 
+      np.mean([d['Age'] for d in list(db.test.find({'Pclass': 3}))])
+     )
+```
+
+```
+First average age:  38.78898148148148
+Second average age:  29.868641304347825
+Third average age:  25.188747433264886
+```
+
 - What was the average fare by passenger class? By survival?
+
+```
+print("First average fare: ", 
+      np.mean([d['Fare'] for d in list(db.test.find({'Pclass': 1}))])
+     )
+print("Second average fare: ", 
+      np.mean([d['Fare'] for d in list(db.test.find({'Pclass': 2}))])
+     )
+print("Third average fare: ", 
+      np.mean([d['Fare'] for d in list(db.test.find({'Pclass': 3}))])
+     )
+print("Surviver average fare: ", 
+      np.mean([d['Fare'] for d in list(db.test.find({'Survived': 1}))])
+     )
+print("NonSurviver average fare: ", 
+      np.mean([d['Fare'] for d in list(db.test.find({'Survived': 0}))])
+     )
+```
+
+```
+First average fare:  84.1546875
+Second average fare:  20.662183152173913
+Third average fare:  13.707707392197124
+Surviver average fare:  48.39540760233918
+NonSurviver average fare:  22.208584036697246
+```
+
 - How many siblings/spouses aboard on average, by passenger class? By survival?
+
+```
+print("First average siblings/spouses: ", 
+      np.mean([d['Siblings/Spouses Aboard'] for d in list(db.test.find({'Pclass': 1}))])
+     )
+print("Second average siblings/spouses: ", 
+      np.mean([d['Siblings/Spouses Aboard'] for d in list(db.test.find({'Pclass': 2}))])
+     )
+print("Third average siblings/spouses: ", 
+      np.mean([d['Siblings/Spouses Aboard'] for d in list(db.test.find({'Pclass': 3}))])
+     )
+print("Surviver average siblings/spouses: ", 
+      np.mean([d['Siblings/Spouses Aboard'] for d in list(db.test.find({'Survived': 1}))])
+     )
+print("NonSurviver average siblings/spouses: ", 
+      np.mean([d['Siblings/Spouses Aboard'] for d in list(db.test.find({'Survived': 0}))])
+     )
+```
+
+```
+First average siblings/spouses:  0.4166666666666667
+Second average siblings/spouses:  0.40217391304347827
+Third average siblings/spouses:  0.6201232032854209
+Surviver average siblings/spouses:  0.47368421052631576
+NonSurviver average siblings/spouses:  0.5577981651376147
+```
+
 - How many parents/children aboard on average, by passenger class? By survival?
+
+```
+print("First average parents/children: ", 
+      np.mean([d['Parents/Children Aboard'] for d in list(db.test.find({'Pclass': 1}))])
+     )
+print("Second average parents/children: ", 
+      np.mean([d['Parents/Children Aboard'] for d in list(db.test.find({'Pclass': 2}))])
+     )
+print("Third average parents/children: ", 
+      np.mean([d['Parents/Children Aboard'] for d in list(db.test.find({'Pclass': 3}))])
+     )
+print("Surviver average parents/children: ", 
+      np.mean([d['Parents/Children Aboard'] for d in list(db.test.find({'Survived': 1}))])
+     )
+print("NonSurviver average parents/children: ", 
+      np.mean([d['Parents/Children Aboard'] for d in list(db.test.find({'Survived': 0}))])
+     )
+```
+
+```
+First average parents/children:  0.35648148148148145
+Second average parents/children:  0.3804347826086957
+Third average parents/children:  0.39630390143737165
+Surviver average parents/children:  0.4649122807017544
+NonSurviver average parents/children:  0.3321100917431193
+```
+
 - Do any passengers have the same name?
+
+```
+names = db.test.distinct('Name')
+len(names) == len(set(names))
+```
+
+```
+True
+```
+
+There are no duplicate names.
+
+
 - (Bonus! Hard, may require pulling and processing with Python) How many married
   couples were aboard the Titanic? Assume that two people (one `Mr.` and one
   `Mrs.`) with the same last name and with at least 1 sibling/spouse aboard are
   a married couple.
+
+```
+import re
+
+# List of Mr. ???
+mrs = list(filter(lambda s: re.match('Mr\..*',s),names))
+# List of Mrs. ???
+mrss = list(filter(lambda s: re.match('Mrs\\..*',s),names))
+
+# Filter lists by if they are supposed to have a spouse on board
+mrs2 = []
+for n in mrs:
+    if db.test.find_one({'Name': n})['Siblings/Spouses Aboard'] == 1:
+        mrs2.append(n)
+mrss2 = []
+for n in mrss:
+    if db.test.find_one({'Name': n})['Siblings/Spouses Aboard'] == 1:
+        mrss2.append(n)
+
+# Get last names
+mrs_last = [n.split(" ")[-1] for n in mrs2]
+mrss_last = [n.split(" ")[-1] for n in mrss2]
+
+couples = 0
+
+# Count matching last names
+for n in mrs_last:
+    try:
+        i = mrss_last.index(n)
+        mrss_last.pop(i)
+        couples+=1
+    except ValueError:
+        pass
+
+print("Number of couples: ", couples)
+```
+
+```
+Number of couples:  42
+```
+
 
 ## Resources and Stretch Goals
 
