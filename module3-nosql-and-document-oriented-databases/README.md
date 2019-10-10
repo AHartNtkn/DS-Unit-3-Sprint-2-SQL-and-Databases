@@ -109,7 +109,7 @@ db.test.insert_one({"rpg_char" : rpg_char})
 db.test.insert_one({
     'sql_id': rpg_char[0],
     'name': rpg_char[1],
-    'hp' : rpg_char[1]
+    'hp' : rpg_char[2]
 })
 
 list(db.test.find())
