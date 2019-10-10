@@ -132,7 +132,7 @@ df = pd.read_csv("titanic.csv")
 data = []
 
 for i in range(len(df)):
-    newDict = dict(df.iloc[1])
+    newDict = dict(df.iloc[i])
     newDict['Survived'] = int(newDict['Survived'])
     newDict['Pclass'] = int(newDict['Pclass'])
     newDict['Age'] = float(newDict['Age'])
