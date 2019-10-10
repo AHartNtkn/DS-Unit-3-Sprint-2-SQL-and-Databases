@@ -141,7 +141,7 @@ for i in range(len(df)):
     newDict['Fare'] = float(newDict['Fare'])
     data.append(newDict)
 
-db.test.insert_many(data[])
+db.test.insert_many(data)
 ```
 
 Push MongoDB - it is flexible and can support fast iteration. Design your own
