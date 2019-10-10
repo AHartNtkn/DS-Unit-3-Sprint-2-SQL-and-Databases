@@ -127,6 +127,23 @@ tomorrow - the main topic will be database differences and tradeoffs!
 Put Titanic data in Big Data! That is, try to load `titanic.csv` from yesterday
 into your MongoDB cluster.
 
+```
+df = pd.read_csv("titanic.csv")
+data = []
+
+for i in range(len(df)):
+    newDict = dict(df.iloc[0])
+    newDict['Survived'] = int(newDict['Survived'])
+    newDict['Pclass'] = int(newDict['Pclass'])
+    newDict['Age'] = float(newDict['Age'])
+    newDict['Siblings/Spouses Aboard'] = int(newDict['Siblings/Spouses Aboard'])
+    newDict['Parents/Children Aboard'] = int(newDict['Parents/Children Aboard'])
+    newDict['Fare'] = float(newDict['Fare'])
+    data.append(newDict)
+
+db.test.insert_many(data[])
+```
+
 Push MongoDB - it is flexible and can support fast iteration. Design your own
 database to save some key/value pairs for an application you'd like to work on
 or data you'd like to analyze, and build it out as much as you can!
