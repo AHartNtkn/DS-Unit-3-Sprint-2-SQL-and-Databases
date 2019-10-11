@@ -235,7 +235,7 @@ import re
 # List of Mr. ???
 mrs = list(filter(lambda s: re.match('Mr\..*',s),names))
 # List of Mrs. ???
-mrss = list(filter(lambda s: re.match('Mrs\\..*',s),names))
+mrss = list(filter(lambda s: re.match('Mrs\..*',s),names))
 
 # Filter lists by if they are supposed to have a spouse on board
 mrs2 = []
