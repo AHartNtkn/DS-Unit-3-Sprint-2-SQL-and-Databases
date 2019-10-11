@@ -34,6 +34,10 @@ sl_curs = sl_conn.cursor()
 sql_comm_1 = "SELECT COUNT(*) FROM demo_table;"
 print("Rows: ", sl_curs.execute(sql_comm_1).fetchall())
 
+"""
+Rows:  [(3,)]
+"""
+
 # How many rows are there where both x and y are at least 5?
 sql_comm_2 = """
 SELECT COUNT(*)
@@ -44,6 +48,10 @@ WHERE x >= 5
 print("where both x and y are at least 5: ",
       sl_curs.execute(sql_comm_2).fetchall())
 
+"""
+where both x and y are at least 5:  [(2,)]
+"""
+
 # How many unique values of y are there
 sql_comm_2 = """
 SELECT COUNT(DISTINCT y)
@@ -51,6 +59,10 @@ FROM demo_table
 """
 print("Distinct y values: ",
       sl_curs.execute(sql_comm_2).fetchall())
+
+"""
+Distinct y values:  [(2,)]
+"""
 
 # Close cursor and connection
 sl_curs.close()
