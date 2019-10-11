@@ -65,7 +65,7 @@ added to the repository along with the generated SQLite database.
 
 Using `sqlite3`, connect to the given `northwind_small.sqlite3` database.
 
-![Northwind Entity-Relationship Diagram](./northwind_erd.png)
+![Northwind Entity-Relationship Diagram](northwind_erd.png)
 
 Above is an entity-relationship diagram - a picture summarizing the schema and
 relationships in the database. Note that it was generated using Microsoft
