@@ -33,7 +33,7 @@ pg_curs.execute(create_titanic_table)
 
 all_values = ", ".join(["("+ str(c[0]) +
                         ", "+ str(c[1]) +
-                        ", \'"+ str(c[2]).replace("\'","`") +
+                        ", \'"+ str(c[2]).replace("\'","\\\'") +
                         "\', \'"+ str(c[3]) +
                         "\', "+ str(c[4]) +
                         ", "+ str(c[5]) +
