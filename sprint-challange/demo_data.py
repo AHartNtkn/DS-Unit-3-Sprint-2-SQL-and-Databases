@@ -43,7 +43,7 @@ sql_comm_2 = """
 SELECT COUNT(*)
 FROM demo_table
 WHERE x >= 5
-  AND y >= 4;
+  AND y >= 5;
 """
 print("where both x and y are at least 5: ",
       sl_curs.execute(sql_comm_2).fetchall())
